@@ -14,11 +14,19 @@ public class Cesar {
     private static int k;
     private static String textoP;
     private static String textoC;
-    public static final String alfabeto = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz0123456789 ";
+    private static String alfabeto = "";
 
  
     public static void setK(int ka){
         k=ka;
+    }
+    
+    public static void setAlfabeto(String alfa){
+        alfabeto=alfa;
+    }
+    
+    public static String getAlfabeto(){
+        return alfabeto;
     }
 
     public static String cifrar(String mensaje) {

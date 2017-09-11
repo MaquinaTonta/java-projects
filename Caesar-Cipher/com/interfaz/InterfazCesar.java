@@ -6,6 +6,7 @@
 package com.interfaz;
 
 import com.seguridad.Cesar;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -41,6 +42,11 @@ public class InterfazCesar extends javax.swing.JFrame {
                     txtMensaje.setText(null);
                     txtCifrado.setText(null);
                     txtCifrado.setEditable(false);
+                    warningMensaje.setText(null);
+                    warningCifrado.setText(null);
+                    warningClave.setText(null);
+                    txtMensaje.setBackground(Color.WHITE);
+                    txtCifrado.setBackground(Color.WHITE);
                 }
             }
         });
@@ -55,6 +61,11 @@ public class InterfazCesar extends javax.swing.JFrame {
                     txtClave.setText(null);
                     txtMensaje.setText(null);
                     txtMensaje.setEditable(false);
+                    warningMensaje.setText(null);
+                    warningCifrado.setText(null);
+                    warningClave.setText(null);
+                    txtMensaje.setBackground(Color.WHITE);
+                    txtCifrado.setBackground(Color.WHITE);
                 }
             }
         });
@@ -81,7 +92,7 @@ public class InterfazCesar extends javax.swing.JFrame {
                 if (!txtMensaje.getText().isEmpty()) {
                     String cadenaMensaje = txtMensaje.getText();
                     for (int i = 0; i < cadenaMensaje.length(); i++) {
-                        if (Cesar.alfabeto.indexOf(cadenaMensaje.charAt(i)) == -1) {
+                        if (Cesar.getAlfabeto().indexOf(cadenaMensaje.charAt(i)) == -1) {
                             warningMensaje.setText("Caracter no encontrado en el alfabeto");
                             btnEnviar.setEnabled(false);
                             hayError = true;
@@ -118,7 +129,7 @@ public class InterfazCesar extends javax.swing.JFrame {
                 if (!txtCifrado.getText().isEmpty()) {
                     String cadenaCifrado = txtCifrado.getText();
                     for (int i = 0; i < cadenaCifrado.length(); i++) {
-                        if (Cesar.alfabeto.indexOf(cadenaCifrado.charAt(i)) == -1) {
+                        if (Cesar.getAlfabeto().indexOf(cadenaCifrado.charAt(i)) == -1) {
                             warningCifrado.setText("Caracter no encontrado en el alfabeto");
                             btnEnviar.setEnabled(false);
                             hayError = true;
@@ -232,7 +243,7 @@ public class InterfazCesar extends javax.swing.JFrame {
                         }
                         if (tipo.isEmpty()) {
                             int clave = Integer.parseInt(textfield);
-                            if (clave < 0 || clave > Cesar.alfabeto.length() - 1) {
+                            if (clave < 0 || clave > Cesar.getAlfabeto().length() - 1) {
                                 tipo = "RANGO";
                             }
                         }
@@ -288,7 +299,7 @@ public class InterfazCesar extends javax.swing.JFrame {
             }
         });
 
-        lblClave.setText("Clave (0-"+(Cesar.alfabeto.length()-1)+")");
+        lblClave.setText("Clave (0-"+(Cesar.getAlfabeto().length()-1)+")");
 
         btnEnviar.setText("ENVIAR");
         btnEnviar.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +312,11 @@ public class InterfazCesar extends javax.swing.JFrame {
         lblTitulo.setText("CIFRADO CÉSAR");
 
         btnCifrar.setText("Cifrar");
+        btnCifrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCifrarActionPerformed(evt);
+            }
+        });
 
         btnDecifrar.setText("Decifrar");
 
@@ -422,12 +438,18 @@ public class InterfazCesar extends javax.swing.JFrame {
         } else {
             Cesar.setK(Integer.parseInt(txtClave.getText()));
             if (btnCifrar.isSelected()) {
+                txtCifrado.setBackground(Color.YELLOW);
                 txtCifrado.setText(Cesar.cifrar(txtMensaje.getText()));
             } else if (btnDecifrar.isSelected()) {
+                txtMensaje.setBackground(Color.YELLOW);
                 txtMensaje.setText(Cesar.decifrar(txtCifrado.getText()));
             }
         }
     }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private void btnCifrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCifrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCifrarActionPerformed
 
     /**
      * @param args the command line arguments
